@@ -4,7 +4,7 @@ import CategoryGridTile from "../components/CategoryGridTile";
 
 import { CATEGORIES } from "../data/dummy-data";
 
-// 'navigation' prop is provided by Navigation library to all screen components
+// 'navigation' prop is provided by Navigation library to all registered screen components
 function CategoriesScreen({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler() {
