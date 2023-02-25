@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import MealDetailsScreen from "./screens/MealDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="dark" />
-      {/* check react-navigation docs for more info about the package */}
+      {/*  check react-navigation docs for more info about the package */}
       <NavigationContainer>
         <Stack.Navigator
           // We can set an options that we want to apply to all screens to a navigator
@@ -43,6 +44,7 @@ export default function App() {
             //   };
             // }}
           />
+          <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
