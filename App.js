@@ -10,6 +10,8 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailsScreen from "./screens/MealDetailsScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
 
+import FavoritesContextProvider from "./store/context/favorites-context";
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -54,41 +56,43 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       {/*  check react-navigation docs for more info about the package */}
-      <NavigationContainer>
-        <Stack.Navigator
-          // We can set an options that we want to apply to all screens to a navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "#351401" },
-            headerTintColor: "white",
-            contentStyle: { backgroundColor: "#3f2f25" },
-          }}
-        >
-          {/* We need to register all screens, that we want to be able to navigate between in our Navigator component */}
-          <Stack.Screen
-            name="DrawerScreen"
-            // We can also nesting a navigators (see bellow)
-            // => we created a component returning a Drawer navigator and set is as a component to our Stack.Screen
-            component={DrawerNavigator}
-            // screen specific options can be apllied to each screen separately
-            // (these ones overwrites the navigator screenOptions if there are a clash)
-            options={{
-              headerShown: false,
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            // We can set an options that we want to apply to all screens to a navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#351401" },
+              headerTintColor: "white",
+              contentStyle: { backgroundColor: "#3f2f25" },
             }}
-          />
-          <Stack.Screen
-            name="MealsOverview"
-            component={MealsOverviewScreen}
-            //* We can also set an options dynamically using a function like bellow or from inside a component (check MealsOverView screen)
-            // options={({ route, navigation }) => {
-            //   const catId = route.params.categoryId;
-            //   return {
-            //     title: catId,
-            //   };
-            // }}
-          />
-          <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            {/* We need to register all screens, that we want to be able to navigate between in our Navigator component */}
+            <Stack.Screen
+              name="DrawerScreen"
+              // We can also nesting a navigators (see bellow)
+              // => we created a component returning a Drawer navigator and set is as a component to our Stack.Screen
+              component={DrawerNavigator}
+              // screen specific options can be apllied to each screen separately
+              // (these ones overwrites the navigator screenOptions if there are a clash)
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="MealsOverview"
+              component={MealsOverviewScreen}
+              //* We can also set an options dynamically using a function like bellow or from inside a component (check MealsOverView screen)
+              // options={({ route, navigation }) => {
+              //   const catId = route.params.categoryId;
+              //   return {
+              //     title: catId,
+              //   };
+              // }}
+            />
+            <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
